@@ -1,0 +1,12 @@
+{
+    "name": "carlobeltrame/cyon-hitobito-mailing-lists",
+    "description": "Automatic email redirects on cyon.ch based on hitobito mailing lists",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.2",
+        "symfony/mime": "^5.1",
+        "symfony/mailer": "^5.1",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "license": "MIT"
+}

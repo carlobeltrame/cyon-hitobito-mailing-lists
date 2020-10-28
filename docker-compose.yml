@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  cli:
+    build: .
+    volumes:
+      - .:/app
+    entrypoint: bash -c "cat example-mail.txt | lists/test.php"
+
+  composer:
+    image: composer:2
+    restart: 'no'
+    command: bash -c "composer install --no-interaction --no-plugins --no-scripts --prefer-dist --no-suggest"
+    volumes:
+      - .:/app
+      - composer-cache:/tmp/cache
+
+volumes:
+  composer-cache:

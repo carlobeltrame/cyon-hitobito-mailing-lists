@@ -1,0 +1,6 @@
+.env
+/vendor/
+/lists/*
+!/lists/test.php
+.idea
+mail.txt
