@@ -50,7 +50,9 @@ function get_all_emails($person, Client $client, $accessToken) {
     $response = $client->request('GET', $response->getHeader('Location')[0], ['query' => ['token' => $accessToken]]);
     if ($response->getStatusCode() !== 200) return [$person->email];
     $data = json_decode($response->getBody());
-    $additionalEmailIds = $data->people[0]->links->additional_emails;
+    $links = $data->people[0]->links;
+    if (!property_exists($links, 'additional_emails')) return [$person->email];
+    $additionalEmailIds = $links->additional_emails;
     if (!$additionalEmailIds) return [$person->email];
     $additionalEmails = array_filter(array_map(function($id) use($data) {
         return find_by_id($data->linked->additional_emails, $id, (object)['email' => null])->email;
