@@ -44,23 +44,8 @@ function extract_emails($people, Client $client, $accessToken) {
 
 function get_all_emails($person, Client $client, $accessToken) {
     if (!$person) return [];
-    // TODO use $person['list_emails'] instead, once it is rolled out in production
-    $response = $client->request('GET', 'de/people/' . $person->id . '.json', ['query' => ['token' => $accessToken ], 'allow_redirects' => false]);
-    if ($response->getStatusCode() !== 302) return [$person->email];
-    $response = $client->request('GET', $response->getHeader('Location')[0], ['query' => ['token' => $accessToken]]);
-    if ($response->getStatusCode() !== 200) return [$person->email];
-    $data = json_decode($response->getBody());
-    $links = $data->people[0]->links;
-    if (!property_exists($links, 'additional_emails')) return [$person->email];
-    $additionalEmailIds = $links->additional_emails;
-    if (!$additionalEmailIds) return [$person->email];
-    $additionalEmails = array_filter(array_map(function($id) use($data) {
-        return find_by_id($data->linked->additional_emails, $id, (object)['email' => null])->email;
-    }, $additionalEmailIds));
-    return array_merge(
-        [$person->email],
-        $additionalEmails,
-    );
+    if (!property_exists($person, 'list_emails')) return [];
+    return $person->list_emails;
 }
 
 function find_by_id($entries, $id, $default = null) {
