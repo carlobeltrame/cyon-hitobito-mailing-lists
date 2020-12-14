@@ -1,6 +1,6 @@
 .env
 /vendor/
 /lists/*
-!/lists/test.php
+!/lists/*.php.example
 .idea
 mail.txt
