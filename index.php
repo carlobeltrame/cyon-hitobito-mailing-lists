@@ -60,7 +60,7 @@ function send_message($message, $firstLine, $recipients) {
     if (count($recipients) === 0) return;
     $recipientAddresses = array_map(function($recipient) { return new Address($recipient); }, $recipients);
 
-    if (!preg_match('/^From [^ ]+=([^= ]+) /', $firstLine, $matches)) return;
+    if (!preg_match('/^From ([^ ]+) /', $firstLine, $matches)) return;
     $sender = new Address($matches[1]);
     $envelope = new Envelope($sender, $recipientAddresses);
 
@@ -81,6 +81,8 @@ $stdin = fopen('php://stdin', 'r');
 //$outfile = fopen(__DIR__ . '/mail.txt', 'a');
 //fwrite($outfile, "Mail received for list id $LIST_ID\n");
 [$message, $firstLine] = read_message($stdin);
+//fwrite($outfile, $firstLine);
+//fwrite($outfile, $message);
 
 $recipients = fetch_mailing_list_subscribers($_ENV['HITOBITO_API_BASE_URL'], $_ENV['GROUP_ID'], $LIST_ID, $_ENV['API_TOKEN']);
 

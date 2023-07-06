@@ -1,43 +1,44 @@
-From SRS0=KoVRPd=EC=somedomain.ch=someone@somedomain.ch Tue Oct 27 21:54:31 2020
-Received: from mail-gateway-shared14.cyon.net ([194.126.200.67]:57144)
+From someone@somedomain.ch Thu Jul 06 21:43:28 2023
+Received: from mail-gateway-shared03.cyon.net ([194.126.200.53]:48136)
 	by s076.cyon.net with esmtps  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
+	(Exim 4.96)
 	(envelope-from <someone@somedomain.ch>)
-	id 1kXVzD-00AaqD-B4
-	for test@somedomain.ch; Tue, 27 Oct 2020 21:54:31 +0100
+	id 1qHUsy-0095Mw-09
+	for test@somedomain.ch;
+	Thu, 06 Jul 2023 21:43:28 +0200
 Received: from s076.cyon.net ([149.126.4.85])
-	by mail-gateway-shared14.cyon.net with esmtpsa (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+	by mail-gateway-shared03.cyon.net with esmtpsa (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
 	(Exim)
 	(envelope-from <someone@somedomain.ch>)
-	id 1kXVzB-0000Mk-J2
-	for test@somedomain.ch; Tue, 27 Oct 2020 21:54:31 +0100
+	id 1qHUsx-0006do-1M
+	for test@somedomain.ch;
+	Thu, 06 Jul 2023 21:43:27 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=somedomain.ch; s=default; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Date:Message-ID:To:Subject:From:Sender:Reply-To:Cc:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References;
-	bh=6lMbKl0kTAdA7DrjEgxU0McE4tJeWL2b6aGuw0au4vo=; b=DoYK7KvnjeoOPoJMmuIjt8B1kz
-	BtEO79uvsyfX62zmkOM0CmoSOEAVctWoXno3CRX2JJ6w7B6dubYR76+/qV8SOKMraxrppYwSdJiil
-	FdQV7fDGeC65zRAvAKWKefkq/3VUYfhIxZQYihaV3kz7eUm0rA3NcceHFh+UM1RgYZebsXW17y7DB
-	mvFEu+e9ntAFKWOk1lQ0VX2A697sM92vOmXUv7y+U7aDcz9EsRb0FHAmBUwXRK4LBbr6XyYk7/+h7
-	xMfj/YGdtKbqFx5QKrtThfrl3AxPeyuXJzLqdBWrRFqEHcd0zvMX7OqPWWUsjY3ZREqXrWUEOF+mQ
-	YwD7oW8g==;
-Received: from [10.20.10.231] (port=44254 helo=mail.cyon.ch)
-	by s076.cyon.net with esmtpa (Exim 4.93)
+	d=somedomain.ch; s=default; h=Content-Transfer-Encoding:Content-Type:Subject:
+	From:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+	Content-Description; bh=6lMbKl0kTAdA7DrjEgxU0McE4tJeWL2b6aGuw0au4vo=; b=QVMK6
+	ZvSkSmSMMXKKUkwEdltumlNJAuVV4ngtJbnESnjjkpMK6rZUtNdbviCenMHhKdeCi4vRVJvRBRgG4
+	4lRTUsIhHez+0a9nn/QKVm3Z6XJzjdTGwawkhu72H8yOrJc8e2UinH29BozmjgyLWXgr08jVY3A7r
+	321kkeXpM8dU/MtkWt2VuhrZdeYqZFtX6EAzzr3ef4PP4oi97msJXRFEqbSDPvxOnrqbVTs0jjOgm
+	eBd4SfqZrr9ZlJNfpqhz9J5v4OKlSRdbOnTCOUyabkkAYzzuBzSeL8kdYqgdnd0sxwobDHSNFhJ4j
+	OJoZnLeLXtsAE00THrL2awoHjxUsA==;
+Received: from [10.20.10.232] (port=53214 helo=mail.cyon.ch)
+	by s076.cyon.net with esmtpa (Exim 4.96)
 	(envelope-from <someone@somedomain.ch>)
-	id 1kXVzA-00Aap7-EG
-	for test@somedomain.ch; Tue, 27 Oct 2020 21:54:28 +0100
+	id 1qHUsw-0095MS-0l
+	for test@somedomain.ch;
+	Thu, 06 Jul 2023 21:43:26 +0200
+Message-ID: <6a7a76af-0d20-fd51-5e4b-fd4912c2a3df@somedomain.ch>
+Date: Thu, 6 Jul 2023 21:43:25 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Firefox/102.0 Thunderbird/102.11.0
+Content-Language: en-US
+To: test@somedomain.ch
 From: someone <someone@somedomain.ch>
 Subject: Hello World
-To: test@somedomain.ch
-Message-ID: <1b14da24-6120-b8d8-d1f3-c5fee5129835@somedomain.ch>
-Date: Tue, 27 Oct 2020 21:54:28 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Firefox/68.0 Thunderbird/68.10.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - s076.cyon.net
 X-AntiAbuse: Original Domain - somedomain.ch
@@ -45,7 +46,6 @@ X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
 X-AntiAbuse: Sender Address Domain - somedomain.ch
 X-Get-Message-Sender-Via: s076.cyon.net: authenticated_id: someone@somedomain.ch
 X-Authenticated-Sender: s076.cyon.net: someone@somedomain.ch
-X-OutGoing-Spam-Status: No, score=-1.1
 
 Hoi zäme
 
