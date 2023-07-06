@@ -1,3 +1,4 @@
+#!/usr/local/bin/php -q
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
@@ -12,6 +13,14 @@ function read_env() {
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->load();
     $dotenv->required(['API_TOKEN', 'GROUP_ID', 'HITOBITO_API_BASE_URL', 'MAIL_HOST', 'MAIL_PORT', 'MAIL_USERNAME', 'MAIL_PASSWORD', 'MAIL_ENCRYPTION', 'CYON_DOMAIN']);
+}
+
+function read_list_id() {
+    $listName = $_ENV['RECIPIENT'];
+    if (!$listName) return null;
+
+    $sanitizedListName = preg_replace('/[^A-Za-z0-9_.]/', '_', $listName);
+    return $_ENV["LIST_ID_${sanitizedListName}"] ?? null;
 }
 
 function read_message($inputFile) {
@@ -76,17 +85,20 @@ function send_message($message, $firstLine, $recipients) {
 ini_set('error_reporting', 0);
 
 read_env();
+$listId = read_list_id();
 
-$stdin = fopen('php://stdin', 'r');
-//$outfile = fopen(__DIR__ . '/mail.txt', 'a');
-//fwrite($outfile, "Mail received for list id $LIST_ID\n");
-[$message, $firstLine] = read_message($stdin);
-//fwrite($outfile, $firstLine);
-//fwrite($outfile, $message);
+if ($listId) {
+    $stdin = fopen('php://stdin', 'r');
+    //$outfile = fopen(__DIR__ . '/mail.txt', 'a');
+    //fwrite($outfile, "Mail received for list ${_ENV['RECIPIENT']} with id $listId\n");
+    [$message, $firstLine] = read_message($stdin);
+    //fwrite($outfile, $firstLine);
+    //fwrite($outfile, $message);
 
-$recipients = fetch_mailing_list_subscribers($_ENV['HITOBITO_API_BASE_URL'], $_ENV['GROUP_ID'], $LIST_ID, $_ENV['API_TOKEN']);
+    $recipients = fetch_mailing_list_subscribers($_ENV['HITOBITO_API_BASE_URL'], $_ENV['GROUP_ID'], $listId, $_ENV['API_TOKEN']);
 
-send_message($message, $firstLine, $recipients);
+    send_message($message, $firstLine, $recipients);
 
-fclose($stdin);
-//fclose($outfile);
+    fclose($stdin);
+    //fclose($outfile);
+}
