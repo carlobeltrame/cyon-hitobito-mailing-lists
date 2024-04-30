@@ -69,8 +69,7 @@ function send_message($message, $firstLine, $recipients) {
     if (count($recipients) === 0) return;
     $recipientAddresses = array_map(function($recipient) { return new Address($recipient); }, $recipients);
 
-    if (!preg_match('/^From ([^ ]+) /', $firstLine, $matches)) return;
-    $sender = new Address($matches[1]);
+    $sender = new Address($_ENV['MAIL_USERNAME']);
     $envelope = new Envelope($sender, $recipientAddresses);
 
     $message = new RawMessage($message);
