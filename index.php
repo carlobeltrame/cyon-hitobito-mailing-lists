@@ -20,7 +20,7 @@ function read_list_id() {
     if (!$listName) return null;
 
     $sanitizedListName = preg_replace('/[^A-Za-z0-9_.]/', '_', $listName);
-    return $_ENV["LIST_ID_${sanitizedListName}"] ?? null;
+    return $_ENV["LIST_ID_{$sanitizedListName}"] ?? null;
 }
 
 function read_message($inputFile) {
