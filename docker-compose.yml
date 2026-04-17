@@ -5,7 +5,9 @@ services:
     build: .
     volumes:
       - .:/app
-    entrypoint: bash -c "cat example-mail.txt | lists/test.php"
+    entrypoint: bash -c "cat example-mail.txt | php index.php"
+    environment:
+      RECIPIENT: test@gryfensee.ch
 
   composer:
     image: composer:2
