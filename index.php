@@ -37,32 +37,11 @@ function read_message($inputFile) {
 
 function fetch_mailing_list_subscribers($hitobitoBaseUrl, $groupId, $listId, $accessToken) {
     $client = new Client(['base_uri' => $hitobitoBaseUrl]);
-    $response = $client->request('GET', 'de/groups/' . $groupId . '/mailing_lists/' . $listId . '.json', ['query' => ['token' => $accessToken]]);
+    $response = $client->request('GET', 'api/mailing_lists/' . $listId, ['query' => ['extra_fields[mailing_lists]' => 'subscribers', 'token' => $accessToken]]);
     if ($response->getStatusCode() !== 200) return [];
     $data = json_decode($response->getBody());
-    $subscribers = $data->mailing_lists[0]->links->subscribers;
-    return array_values(array_unique(array_filter(array_merge([], ...array_map(extract_emails($data->linked->people, $client, $accessToken), $subscribers)))));
-}
-
-function extract_emails($people, Client $client, $accessToken) {
-    return function($personId) use($people, $client, $accessToken) {
-        $person = find_by_id($people, $personId);
-        return get_all_emails($person, $client, $accessToken);
-    };
-}
-
-function get_all_emails($person, Client $client, $accessToken) {
-    if (!$person) return [];
-    if (!property_exists($person, 'list_emails')) return [];
-    return $person->list_emails;
-}
-
-function find_by_id($entries, $id, $default = null) {
-    $candidates = array_filter((array)$entries, function($entry) use($id) {
-        return $entry->id === $id;
-    });
-    if (count($candidates) === 0) return $default;
-    return array_values($candidates)[0];
+    $subscribers = $data->data->attributes->subscribers;
+    return array_values(array_unique(array_filter(array_merge([], ...array_map(function($subscriber) { return $subscriber->list_emails; }, $subscribers)))));
 }
 
 function send_message($message, $firstLine, $recipients) {
