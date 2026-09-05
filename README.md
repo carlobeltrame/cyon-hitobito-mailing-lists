@@ -1,3 +1,7 @@
+> :warning: **NO LONGER MAINTAINED**
+> This repository is no longer maintained, because the group which this was implemented for moved from cyon to Hostpoint :cry:
+> Instead, if your hosting provides mailman mailing lists (cyon does, but I haven't tested there), you may be able to use this [other, less invasive tool](https://github.com/gloggi/mailman-hitobito-mailing-lists) which just syncs the mailing list subscribers into a mailman mailing list on a regular schedule.
+
 # hitobito mailing lists using cyon.ch mail redirects
 
 This project helps to use the [cyon.ch](https://cyon.ch) email forwarding features in combination with [hitobito](https://github.com/hitobito/hitobito) mailing lists. This way, very robust and dynamically updated email forwarding lists can be created.
